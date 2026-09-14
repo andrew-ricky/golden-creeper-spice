@@ -1,0 +1,384 @@
+:root {
+  --primary: #154D2B;      /* Deep Natural Green */
+  --primary-light: #1E663B;
+  --accent: #FFD700;       /* High Contrast Gold */
+  --accent-hover: #E6C200;
+  --dark: #0D1610;         
+  --light: #FFFFFF;        /* මුළු සයිට් එකේම body එක සඳහා සුදු පාට */
+  --white: #ffffff;
+  --gray: #64748B;
+  --shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
+html { scroll-behavior: smooth; }
+
+/* මුළු සයිට් එකේම body එක සුදු පාටට සහ අකුරු පැහැදිලි අඳුරු පාටකට සැකසීම */
+body { 
+  background-color: var(--light); 
+  color: var(--dark); 
+  line-height: 1.6; 
+  overflow-x: hidden; 
+  min-height: 100vh;
+}
+
+/* Header & Nav සඳහා අලංකාර Gradient Green එක */
+header {
+  background: linear-gradient(90deg, #07170e 0%, #0f2d1a 50%, #163822 100%);
+  backdrop-filter: blur(10px);
+  color: var(--white);
+  padding: 1rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+header .logo { 
+  font-size: 1.6rem; 
+  font-weight: 700; 
+  color: var(--accent); 
+  letter-spacing: -0.5px;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.8rem 1.2rem;
+}
+
+nav a { 
+  color: rgba(255,255,255,0.9); 
+  text-decoration: none; 
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease; 
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+}
+
+nav a:hover, nav a.active { 
+  color: var(--accent); 
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Shopping Cart Icon Styling */
+.cart-icon-btn {
+  position: relative;
+  font-size: 1.1rem;
+  color: var(--accent) !important;
+  display: flex;
+  align-items: center;
+  padding: 0.4rem 0.8rem !important;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 20px !important;
+  transition: all 0.3s ease;
+}
+
+.cart-icon-btn:hover {
+  background: rgba(255, 215, 0, 0.25) !important;
+  transform: scale(1.05);
+}
+
+.cart-badge {
+  background: #E63946;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.1rem 0.45rem;
+  border-radius: 50%;
+  margin-left: 0.4rem;
+  line-height: 1;
+}
+
+.cart-badge:empty,
+.cart-badge[data-count="0"] {
+  display: none;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 55vh;
+  min-height: 420px;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: bgFade 20s infinite;
+}
+
+.slide-2 { 
+  background-image: url('https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Main/susantha-spice-herbal-garden.image.4.Woblo.jpg'); 
+  animation-delay: 0s; 
+}
+.slide-4 { 
+  background-image: url('https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Main/susantha-spice-herbal-garden.image.5.Woblo.jpg'); 
+  animation-delay: 5s; 
+}
+.slide-5 { 
+  background-image: url('https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Main/susantha-spice-herbal-garden.image.7.Woblo.jpg'); 
+  animation-delay: 10s; 
+}
+.slide-6 { 
+  background-image: url('https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Main/susantha-spice-herbal-garden.image.8.Woblo.jpg'); 
+  animation-delay: 15s; 
+}
+
+@keyframes bgFade {
+  0% { opacity: 0; transform: scale(1); }
+  5% { opacity: 1; }
+  25% { opacity: 1; }
+  30% { opacity: 0; transform: scale(1.04); }
+  100% { opacity: 0; }
+}
+
+/* Container & Global Layout */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1rem; }
+.text-center { text-align: center; }
+
+h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1rem; }
+.subtitle { color: var(--gray); font-size: 1rem; margin-bottom: 1.5rem; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+/* Product Grid (4 Columns Layout) */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-info {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-info h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 0.4rem;
+}
+
+.product-info .price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.6rem;
+}
+
+.product-info button {
+  margin-top: auto;
+}
+
+/* Section Controls */
+.welcome-section, .safety-section, .products-section { padding: 4rem 0; }
+.safety-section { background: #EBF2ED; }
+
+/* Remedies Section (Side-by-Side 3 Cards Layout) */
+.remedies-section {
+  padding: 4rem 0;
+}
+
+.remedies-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.remedy-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  
+  /* Modern Fade Slide Up Animation */
+  animation: modernFadeUp linear forwards;
+  animation-timeline: view();
+  animation-range: entry 15% cover 35%;
+}
+
+.remedy-card:nth-child(1) { animation-delay: 0s; }
+.remedy-card:nth-child(2) { animation-delay: 0.15s; }
+.remedy-card:nth-child(3) { animation-delay: 0.3s; }
+
+.remedy-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(21, 77, 43, 0.15);
+}
+
+.remedy-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.remedy-card:hover img {
+  transform: scale(1.05);
+}
+
+.remedy-card .remedy-title,
+.remedy-card h3 {
+  background: var(--primary);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* Keyframe for Modern Smooth Fade & Slide Animation */
+@keyframes modernFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Badges & Links */
+.badge { 
+  background: var(--accent); 
+  color: var(--dark); 
+  padding: 0.4rem 0.9rem; 
+  border-radius: 30px; 
+  font-weight: 700; 
+  font-size: 0.8rem; 
+  text-transform: uppercase;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--primary);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.btn-link:hover { color: var(--primary-light); }
+
+.image-box img { 
+  width: 100%; 
+  border-radius: 16px; 
+  box-shadow: var(--shadow); 
+  object-fit: cover; 
+  height: 340px; 
+  transition: transform 0.4s ease;
+}
+
+.image-box img:hover { transform: scale(1.02); }
+
+/* Buttons */
+button, .btn, .btn-light { 
+  background: var(--primary); 
+  color: white; 
+  border: none; 
+  padding: 0.8rem 1.8rem; 
+  border-radius: 8px; 
+  cursor: pointer; 
+  text-decoration: none; 
+  display: inline-block; 
+  transition: all 0.3s ease; 
+  font-weight: 700; 
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(21, 77, 43, 0.3);
+}
+
+button:hover, .btn:hover { 
+  background: var(--primary-light); 
+  transform: translateY(-2px);
+}
+
+.btn-light { 
+  background: var(--accent); 
+  color: var(--dark); 
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+.btn-light:hover { background: var(--accent-hover); }
+
+/* Footer */
+footer { background: var(--dark); color: #94A3B8; padding: 4rem 0 2rem; margin-top: 2rem; }
+footer h3 { color: var(--accent); margin-bottom: 1rem; font-weight: 600; }
+footer a { color: #94A3B8; text-decoration: none; transition: color 0.3s; }
+footer a:hover { color: var(--accent); }
+
+/* Tables & Forms */
+table { width: 100%; border-collapse: collapse; background: white; margin-top: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #ddd; }
+th { background: var(--primary); color: white; }
+input[type="number"], input[type="text"], input[type="password"], textarea { padding: 0.6rem; width: 100%; margin-bottom: 0.8rem; border: 1px solid #ccc; border-radius: 4px; }
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .products-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-2, .grid-3, .remedies-grid { grid-template-columns: 1fr; }
+  .hero { height: 50vh; }
+  nav { gap: 0.5rem; }
+  nav a { font-size: 0.85rem; padding: 0.2rem 0.4rem; }
+}
+
+@media (max-width: 576px) {
+  .products-grid { grid-template-columns: 1fr; }
+}
