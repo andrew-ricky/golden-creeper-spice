@@ -80,6 +80,29 @@
       background: var(--primary-light);
       transform: translateY(-2px);
     }
+
+    /* New Credit Card Styles */
+    .card-details-box {
+      background: #f1f5f9;
+      padding: 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card-details-box h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
   </style>
 </head>
 <body>
@@ -141,6 +164,32 @@
           <div class="form-group">
             <label>Phone Number</label>
             <input type="tel" id="checkout-phone" required placeholder="Enter your phone number">
+          </div>
+
+          <!-- Credit Card Information Section -->
+          <div class="card-details-box">
+            <h3><i class="fas fa-credit-card"></i> Payment Information</h3>
+            
+            <div class="form-group">
+              <label>Cardholder Name</label>
+              <input type="text" id="card-holder" required placeholder="Name on card">
+            </div>
+
+            <div class="form-group">
+              <label>Card Number</label>
+              <input type="text" id="card-number" required maxlength="19" placeholder="4532 •••• •••• ••••">
+            </div>
+
+            <div class="card-row">
+              <div class="form-group">
+                <label>Expiry Date</label>
+                <input type="text" id="card-expiry" required maxlength="5" placeholder="MM/YY">
+              </div>
+              <div class="form-group">
+                <label>CVV / CVC</label>
+                <input type="password" id="card-cvv" required maxlength="4" placeholder="123">
+              </div>
+            </div>
           </div>
 
           <button type="submit" class="checkout-btn">Complete Order</button>
