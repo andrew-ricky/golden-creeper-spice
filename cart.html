@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cart - Golden Creeper</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Cart Page Specific Modern Styling */
+    .cart-section {
+      padding: 3rem 0;
+      min-height: 60vh;
+    }
+
+    .cart-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .cart-wrapper h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      border-bottom: 2px solid #f0f4f1;
+      padding-bottom: 0.8rem;
+    }
+
+    /* Modern Table Layout */
+    .cart-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: 1rem;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid #eaeaea;
+    }
+
+    .cart-table th {
+      background: var(--primary);
+      color: white;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .cart-table td {
+      padding: 1.2rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid #eaeaea;
+      color: var(--dark);
+      font-size: 0.95rem;
+      vertical-align: middle;
+      background: #ffffff;
+    }
+
+    .cart-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cart-table tr:hover td {
+      background: #fcfdfc;
+    }
+
+    /* Quantity Input inside Cart */
+    .cart-table input[type="number"] {
+      width: 70px;
+      padding: 0.4rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      text-align: center;
+      font-weight: 600;
+      background: #f8fafc;
+    }
+
+    /* Action Delete Button */
+    .cart-table button, .btn-remove {
+      background: #fee2e2;
+      color: #dc2626;
+      border: none;
+      padding: 0.5rem 0.9rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      box-shadow: none;
+    }
+
+    .cart-table button:hover, .btn-remove:hover {
+      background: #dc2626;
+      color: white;
+      transform: translateY(-1px);
+    }
+
+    /* Cart Summary Section */
+    .cart-summary {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 2px solid #f0f4f1;
+    }
+
+    .cart-summary h3 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .cart-summary h3 span {
+      color: var(--primary);
+    }
+
+    @media (max-width: 768px) {
+      .cart-wrapper {
+        padding: 1.2rem;
+      }
+      .cart-table {
+        display: block;
+        overflow-x: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Cart Content Section -->
+  <section class="cart-section">
+    <div class="container">
+      <div class="cart-wrapper">
+        <h2>Your Shopping Cart</h2>
+        
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price ($)</th>
+              <th>Quantity</th>
+              <th>Total ($)</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="cart-items">
+            <!-- JavaScript හරහා items මෙහි ඩයිනමික් ලෙස ලෝඩ් වේ -->
+          </tbody>
+        </table>
+
+        <div class="cart-summary">
+          <h3>Total: $<span id="cart-total">0.00</span></h3>
+          <button onclick="proceedToCheckout()" class="btn" style="padding: 0.8rem 2rem; background: var(--primary); color: white; border: none; border-radius: 6px; font-weight: 700; cursor: pointer;">Proceed to Checkout</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p style="color: #94A3B8; font-size: 0.9rem;">Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p style="margin-bottom: 0.5rem;"><a href="index.html">Home</a></p>
+        <p style="margin-bottom: 0.5rem;"><a href="products.html">All Products</a></p>
+        <p style="margin-bottom: 0.5rem;"><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p style="color: #94A3B8; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p style="color: #94A3B8; font-size: 0.9rem;"><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase CDN and Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (typeof renderCart === 'function') {
+        renderCart();
+      }
+    });
+
+    // Login Check and Proceed to Checkout
+    async function proceedToCheckout() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      
+      if (!session) {
+        localStorage.setItem('redirectAfterLogin', 'cart.html');
+        alert('Please login first to proceed with checkout.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      window.location.href = 'checkout.html';
+    }
+  </script>
+</body>
+</html>

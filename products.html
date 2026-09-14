@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Products - Golden Creeper Spice Garden</title>
+
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Supabase JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Products Section -->
+  <section class="products-section" style="padding: 2.5rem 0 4rem 0;">
+    <div class="container">
+      <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Our Organic Products & Spices</h2>
+      
+      <!-- Container for Dynamic Products (4 Columns Grid) -->
+      <div class="products-grid grid-4" id="all-products">
+        
+        <!-- Supabase Data Load වන තුරු Placeholder -->
+        <div class="product-card" style="text-align: center; padding: 2rem; grid-column: 1 / -1;">
+          <p style="color: var(--gray);">Loading Products...</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p>Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="products.html">All Products</a></p>
+        <p><a href="benefits.html">Herbal Benefits</a></p>
+        <p><a href="gallery.html">Photo Gallery</a></p>
+        <p><a href="shipping.html">Shipping Info</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase CDN and Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- Page Specific Script for Loading Products & Cart Protection -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProductsFromSupabase();
+    });
+
+    async function loadProductsFromSupabase() {
+      const container = document.getElementById('all-products');
+      
+      const { data: products, error } = await supabaseClient
+        .from('products')
+        .select('*')
+        .order('id', { ascending: true });
+
+      if (error) {
+        container.innerHTML = `<p style="color: red; grid-column: 1 / -1; text-align: center;">Error loading products: ${error.message}</p>`;
+        return;
+      }
+
+      if (!products || products.length === 0) {
+        container.innerHTML = `<p style="color: #666; grid-column: 1 / -1; text-align: center;">No products available at the moment.</p>`;
+        return;
+      }
+
+      container.innerHTML = '';
+
+      products.forEach(p => {
+        container.innerHTML += `
+          <div class="product-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flexDirection: column;">
+            <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 200px; object-fit: cover;">
+            <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--dark);">${p.name}</h3>
+              <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1;">${p.description || ''}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+                <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">$${parseFloat(p.price).toFixed(2)}</span>
+                <button onclick="checkAuthAndAddToCart(${p.id}, '${p.name}', ${p.price}, '${p.image}')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Add to Cart</button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+    }
+
+    // Login Check before adding to cart
+    async function checkAuthAndAddToCart(id, name, price, image) {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      
+      if (!session) {
+        localStorage.setItem('redirectAfterLogin', 'products.html');
+        alert('Please login first to add items to your cart.');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      // Add to Cart logic
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingIndex = cart.findIndex(item => item.id === id);
+      
+      if (existingIndex > -1) {
+        cart[existingIndex].qty += 1;
+      } else {
+        cart.push({ id, name, price, image, qty: 1 });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      
+      // Update cart count badge if function exists in main.js
+      if (typeof updateCartCount === 'function') {
+        updateCartCount();
+      }
+
+      
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery - Golden Creeper Spice Garden</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .gallery-section {
+      padding: 3rem 0;
+    }
+
+    /* Grid Layout for 12 Images */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* Modern Minimal Image Cards */
+    .gallery-card {
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      aspect-ratio: 4 / 3;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+
+ <!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" >About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html"class="active">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Gallery Main Section -->
+  <section class="gallery-section">
+    <div class="container">
+      
+      <div class="text-center" style="max-width: 800px; margin: 0 auto 2.5rem auto;">
+        <span class="badge">Our Moments</span>
+      </div>
+
+      <!-- 12 Images Grid -->
+      <div class="gallery-grid">
+        
+        <!-- Image 1 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/1.jpg" alt="Gallery Image 1">
+        </div>
+
+        <!-- Image 2 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/Screenshot%202026-09-15%20034236.png" alt="Gallery Image 2">
+        </div>
+
+        <!-- Image 3 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/5-1.jpg" alt="Gallery Image 3">
+        </div>
+
+        <!-- Image 4 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/4.jpg" alt="Gallery Image 4">
+        </div>
+
+        <!-- Image 5 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/22.jpg" alt="Gallery Image 5">
+        </div>
+
+        <!-- Image 6 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/6.jpg" alt="Gallery Image 6">
+        </div>
+
+        <!-- Image 7 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/7.jpg" alt="Gallery Image 7">
+        </div>
+
+        <!-- Image 8 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/8.jpg" alt="Gallery Image 8">
+        </div>
+
+        <!-- Image 9 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/12.jpg" alt="Gallery Image 9">
+        </div>
+
+        <!-- Image 10 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/10.jpg" alt="Gallery Image 10">
+        </div>
+
+        <!-- Image 11 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/11.jpg" alt="Gallery Image 11">
+        </div>
+
+        <!-- Image 12 -->
+        <div class="gallery-card">
+          <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/Gallery/9.jpg" alt="Gallery Image 12">
+        </div>
+
+      </div> 
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p>Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="products.html">All Products</a></p>
+        <p><a href="benefits.html">Herbal Benefits</a></p>
+        <p><a href="gallery.html">Photo Gallery</a></p>
+        <p><a href="shipping.html">Shipping Info</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+ <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
+```[cite: 5]

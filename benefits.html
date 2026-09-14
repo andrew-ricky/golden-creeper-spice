@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Benefits of Ayurveda - Golden Creeper Spice Garden</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+  <style>
+    .remedies-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    /* Modern Minimal Card Design */
+    .custom-card {
+      background: #ffffff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      
+      /* Pure CSS Scroll Animation */
+      animation: cardScrollFade 1s ease-out forwards;
+      animation-timeline: view();
+      animation-range: entry 10% cover 30%;
+    }
+
+    .custom-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+      border-color: rgba(21, 77, 43, 0.2);
+    }
+
+    .custom-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .custom-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .card-title {
+      color: var(--primary);
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    /* Minimal Accent Line under Title */
+    .card-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 35px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .custom-card:hover .card-title::after {
+      width: 55px;
+    }
+
+    .card-description {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.6;
+      margin-top: 0.4rem;
+    }
+
+    @keyframes cardScrollFade {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" >About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html"class="active" >Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Benefits Main Section -->
+  <section class="benefits-section" style="padding: 3rem 0;">
+    <div class="container">
+      
+      <!-- Section Title -->
+      <div class="text-center" style="max-width: 800px; margin: 0 auto 3rem auto;">
+        <span class="badge">Natural Healing</span>
+        <h2>Ayurvedic Health & Wellness</h2>
+        <p class="subtitle">Ayurveda brings health and wellness to millions of people worldwide. Sri Lanka has its own traditional healing system using authentic medicinal plants to keep your mind, body, and soul healthy.</p>
+      </div>
+
+      <!-- Benefits Grid -->
+      <div class="remedies-grid">
+        
+        <!-- Card 1 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600" alt="Reduce Stress">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Reduce Stress</h3>
+            <p class="card-description">Meditation, Yoga, Herbal treatments, and breathing exercises are some of the many techniques that help lower anxiety and stress levels naturally.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600" alt="Weight Management">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Weight Management</h3>
+            <p class="card-description">A healthy diet and natural herbal remedies help reduce excess body weight without side effects, restoring balance to your metabolic system.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600" alt="Hormonal Balance">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Hormonal Balance</h3>
+            <p class="card-description">Ayurveda helps balance hormones naturally using time-tested organic herbs to regulate bodily functions effectively.</p>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600" alt="Minimize Inflammation">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Minimize Inflammation</h3>
+            <p class="card-description">Natural remedies reduce joint stiffness, inflammation, and chronic pain using pure Ayurvedic herbal oils and ointments.</p>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=600" alt="Body Detoxification">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Body Detoxification</h3>
+            <p class="card-description">Authentic Ayurvedic medicines help purify the blood, flush out internal toxins, and reinvigorate your daily physical energy.</p>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="custom-card">
+          <div style="overflow: hidden;">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600" alt="Immunity Boosting">
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Immunity Boosting</h3>
+            <p class="card-description">Natural herbs and organic spices strengthen your body's immune system, protecting you against seasonal illnesses and infections.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p>Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="products.html">All Products</a></p>
+        <p><a href="benefits.html">Herbal Benefits</a></p>
+        <p><a href="gallery.html">Photo Gallery</a></p>
+        <p><a href="shipping.html">Shipping Info</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

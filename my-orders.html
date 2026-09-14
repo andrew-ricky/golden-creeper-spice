@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Orders - Golden Creeper</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    .orders-section {
+      padding: 3rem 0;
+      min-height: 70vh;
+    }
+    .orders-container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .order-card {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #eaeaea;
+    }
+    .order-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.8rem;
+      margin-bottom: 1rem;
+    }
+    .status-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: #fef3c7;
+      color: #d97706;
+    }
+    .status-shipped {
+      background: #d1fae5;
+      color: #059669;
+    }
+    .status-delivered {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="my-orders.html" class="active">My Orders</a>
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- My Orders Section -->
+  <section class="orders-section">
+    <div class="container orders-container">
+      <h2 style="color: var(--primary); margin-bottom: 1.5rem;">My Order History</h2>
+      
+      <!-- Login Required Box (Initially Hidden) -->
+      <div id="login-required-box" style="display: none; text-align: center; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
+        <h3 style="margin-bottom: 0.5rem; color: var(--dark);">Please Login to View Orders</h3>
+        <p style="color: #666; margin-bottom: 1.5rem;">You need to be logged in to access your order history.</p>
+        <a href="login.html" class="btn" style="padding: 0.8rem 2rem; background: var(--primary); color: white; border-radius: 6px; text-decoration: none; font-weight: 700;">Login Now</a>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="orders-list">
+        <!-- JavaScript හරහා order cards මෙහි ලෝඩ් වේ -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Supabase CDN and Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      
+      if (!session) {
+        // Login වී නැත්නම් Login Required box එක පෙන්වීම සහ redirect path එක save කිරීම
+        localStorage.setItem('redirectAfterLogin', 'my-orders.html');
+        document.getElementById('login-required-box').style.display = 'block';
+        return;
+      }
+
+      // Login වී ඇත නම් orders fetch කර ගැනීම
+      fetchUserOrders(session.user.id);
+    });
+
+    async function fetchUserOrders(userId) {
+      const container = document.getElementById('orders-list');
+      
+      const { data: orders, error } = await supabaseClient
+        .from('orders')
+        .select('*')
+        .eq('user_id', userId)
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        container.innerHTML = `<p style="color: red; text-align: center;">Error loading orders.</p>`;
+        return;
+      }
+
+      if (!orders || orders.length === 0) {
+        container.innerHTML = `
+          <div style="text-align: center; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <p style="color: #666; font-size: 1.1rem; margin-bottom: 1rem;">You have not placed any orders yet.</p>
+            <a href="products.html" class="btn" style="padding: 0.7rem 1.5rem; background: var(--primary); color: white; border-radius: 6px; text-decoration: none; font-weight: 700;">Start Shopping</a>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = '';
+
+      orders.forEach(order => {
+        let itemsHtml = '';
+        if (order.cart_items && Array.isArray(order.cart_items)) {
+          order.cart_items.forEach(item => {
+            itemsHtml += `<div style="display: flex; justify-content: space-between; font-size: 0.9rem; color: #555; margin-bottom: 0.3rem;">
+              <span>${item.name} (x${item.qty})</span>
+              <span>$${(item.price * item.qty).toFixed(2)}</span>
+            </div>`;
+          });
+        }
+
+        let statusClass = '';
+        let currentStatus = order.status || 'Received';
+        if (currentStatus.toLowerCase() === 'shipped') statusClass = 'status-shipped';
+        else if (currentStatus.toLowerCase() === 'delivered') statusClass = 'status-delivered';
+
+        const orderDate = new Date(order.created_at).toLocaleDateString();
+
+        container.innerHTML += `
+          <div class="order-card">
+            <div class="order-header">
+              <div>
+                <span style="font-weight: 700; color: var(--primary);">Order #${order.id}</span>
+                <span style="font-size: 0.85rem; color: #888; margin-left: 1rem;">Date: ${orderDate}</span>
+              </div>
+              <span class="status-badge ${statusClass}">${currentStatus}</span>
+            </div>
+            <div style="margin-bottom: 1rem;">
+              <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; color: var(--dark);">Items Ordered:</p>
+              ${itemsHtml}
+            </div>
+            <div style="border-top: 1px solid #eee; padding-top: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 0.9rem; color: #666;">Shipping to: ${order.address}, ${order.city}</span>
+              <span style="font-weight: 700; font-size: 1.1rem; color: var(--primary);">Total: $${parseFloat(order.total_amount).toFixed(2)}</span>
+            </div>
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Creeper Spice Garden - Ahungalla</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- AOS Animation CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <div class="logo">🌿 Golden Creeper</div>
+      <nav>
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        <!-- Cart Icon with Badge -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+        <!-- Login / Account Button (Dynamic) -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;">
+          <a href="login.html" class="btn" style="padding: 0.35rem 0.9rem; font-size: 0.85rem; background: var(--accent); color: var(--dark); border-radius: 6px; font-weight: 600; text-decoration: none;">Login</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section with Background Slider Only -->
+  <section class="hero">
+    <!-- Fading Background Slides (Slide 3 Removed) -->
+    <div class="hero-bg slide-2"></div>
+    <div class="hero-bg slide-4"></div>
+    <div class="hero-bg slide-5"></div>
+    <div class="hero-bg slide-6"></div>
+  </section>
+
+  <!-- Welcome / About Section -->
+  <section id="about" class="welcome-section">
+    <div class="container grid-2">
+      <div class="image-box">
+        <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600" alt="Ahungalla Golden Creeper">
+      </div>
+      <div class="text-box">
+        <span class="badge">Ayurveda & Nature</span>
+        <h2>Welcome to Ahungalla Golden Creeper Spice Garden</h2>
+        <p>Located in Ahungalla, Sri Lanka, our garden offers an authentic experience in traditional Ayurvedic medicine and pure organic spices. We practice sustainable farming to cultivate high-quality herbal products for healthy living.</p>
+        <a href="about.html" class="btn-link">Read More About Us <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Hygiene & Safety Section -->
+  <section class="safety-section">
+    <div class="container grid-2">
+      <div class="text-box" data-aos="fade-right" data-aos-duration="1000">
+        <h2>Hygienic Practices & Pure Quality</h2>
+        <p>We process all our herbal oils, teas, and spices following strict health and sanitation guidelines to guarantee safety and purity in every product.</p>
+      </div>
+      <div class="image-box" data-aos="fade-left" data-aos-duration="1000">
+        <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600" alt="Garden Quality">
+      </div>
+    </div>
+  </section>
+
+  
+  <!-- Herbal Remedies & Wellness Section -->
+  <section class="remedies-section">
+    <div class="container">
+      <h2 class="text-center">Herbal Remedies & Wellness</h2>
+      <p class="subtitle text-center">Traditional natural solutions for a healthy lifestyle</p>
+      
+      <!-- 'remedies-grid' Class එක ඇතුළත් කර ඇත -->
+      <div class="remedies-grid">
+        
+        <!-- Card 1 -->
+        <div class="remedy-card">
+          <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600" alt="Skin & Hair Care">
+          <div class="remedy-title">Skin & Hair Care</div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="remedy-card">
+          <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600" alt="Weight Balance">
+          <div class="remedy-title">Weight Balance</div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="remedy-card">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600" alt="Relaxation & Relief">
+          <div class="remedy-title">Relaxation & Relief</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p>Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="products.html">All Products</a></p>
+        <p><a href="benefits.html">Herbal Benefits</a></p>
+        <p><a href="gallery.html">Photo Gallery</a></p>
+        <p><a href="shipping.html">Shipping Info</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      once: false,
+      mirror: true,
+      offset: 120
+    });
+  </script>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

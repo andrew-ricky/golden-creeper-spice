@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Golden Creeper</title>
+  
+  <!-- Google Fonts & FontAwesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    .checkout-section {
+      padding: 3rem 0;
+      min-height: 70vh;
+    }
+
+    .checkout-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+      padding: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .checkout-wrapper h2 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-weight: 700;
+      border-bottom: 2px solid #f0f4f1;
+      padding-bottom: 0.8rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      color: var(--dark);
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      background: #f8fafc;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.9rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .checkout-btn:hover {
+      background: var(--primary-light);
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html">About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge" data-count="0" style="display:none;">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Checkout Section -->
+  <section class="checkout-section">
+    <div class="container">
+      <div class="checkout-wrapper">
+        <h2>Shipping & Payment Details</h2>
+        
+        <form id="checkout-form">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="checkout-name" required placeholder="Enter your full name">
+          </div>
+
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" id="checkout-email" required placeholder="Enter your email" readonly style="background: #e2e8f0; cursor: not-allowed;">
+          </div>
+
+          <div class="form-group">
+            <label>Delivery Address</label>
+            <textarea id="checkout-address" required placeholder="Enter your street address"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>City</label>
+            <input type="text" id="checkout-city" required placeholder="e.g. Ahungalla">
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="checkout-phone" required placeholder="Enter your phone number">
+          </div>
+
+          <button type="submit" class="checkout-btn">Complete Order</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom Popup Modal -->
+  <div id="custom-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 2rem; border-radius: 12px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+      <h3 id="popup-title" style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--primary);">Notice</h3>
+      <p id="popup-message" style="color: #555; margin-bottom: 1.5rem; font-size: 0.95rem;"></p>
+      <button onclick="closePopup()" style="background: var(--primary); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%;">OK</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p style="color: #94A3B8; font-size: 0.9rem;">Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p style="margin-bottom: 0.5rem;"><a href="index.html">Home</a></p>
+        <p style="margin-bottom: 0.5rem;"><a href="products.html">All Products</a></p>
+        <p style="margin-bottom: 0.5rem;"><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p style="color: #94A3B8; font-size: 0.9rem; margin-bottom: 0.5rem;"><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p style="color: #94A3B8; font-size: 0.9rem;"><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Supabase CDN and Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', async () => {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      
+      if (!session) {
+        localStorage.setItem('redirectAfterLogin', 'checkout.html');
+        window.location.href = 'login.html';
+        return;
+      }
+
+      const user = session.user;
+      document.getElementById('checkout-email').value = user.email;
+
+      const { data: profile } = await supabaseClient
+        .from('profiles')
+        .select('full_name')
+        .eq('id', user.id)
+        .single();
+
+      if (profile && profile.full_name) {
+        document.getElementById('checkout-name').value = profile.full_name;
+      }
+    });
+
+    function showPopup(title, message, callback = null) {
+      document.getElementById('popup-title').innerText = title;
+      document.getElementById('popup-message').innerText = message;
+      document.getElementById('custom-popup').style.display = 'flex';
+      window.popupCallback = callback;
+    }
+
+    function closePopup() {
+      document.getElementById('custom-popup').style.display = 'none';
+      if (window.popupCallback) {
+        window.popupCallback();
+      }
+    }
+
+    document.getElementById('checkout-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (!session) {
+        alert("Please login first!");
+        window.location.href = 'login.html';
+        return;
+      }
+
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        showPopup("Cart Empty", "Your cart is empty!");
+        return;
+      }
+
+      let totalAmount = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      const fullName = document.getElementById('checkout-name').value;
+      const email = document.getElementById('checkout-email').value;
+      const address = document.getElementById('checkout-address').value;
+      const city = document.getElementById('checkout-city').value;
+      const phone = document.getElementById('checkout-phone').value;
+
+      const { error } = await supabaseClient.from('orders').insert([
+        {
+          user_id: session.user.id,
+          full_name: fullName,
+          email: email,
+          address: address,
+          city: city,
+          phone: phone,
+          cart_items: cart,
+          total_amount: totalAmount
+        }
+      ]);
+
+      if (error) {
+        showPopup("Order Error", error.message);
+        return;
+      }
+
+      showPopup("Payment Success!", "Your payment was successful and your order has been placed!", () => {
+        localStorage.removeItem('cart');
+        window.location.href = 'index.html';
+      });
+    });
+  </script>
+</body>
+</html>

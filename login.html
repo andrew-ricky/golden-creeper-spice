@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Sign Up - Golden Creeper</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="container" style="padding: 4rem 0; display: flex; justify-content: center;">
+    <div style="background: white; padding: 2.5rem; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 12px 30px rgba(0,0,0,0.08);">
+      
+      <!-- Sign Up Form (Initially Hidden) -->
+      <div id="signup-container" style="display: none;">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Create Account</h2>
+        <form id="signup-form">
+          <div style="margin-bottom: 1rem;">
+            <label style="font-weight: 600; font-size: 0.9rem;">Full Name</label>
+            <input type="text" id="signup-name" name="name" autocomplete="name" required placeholder="Enter your full name" style="width:100%; padding:0.8rem; margin-top:0.4rem; border:1px solid #ccc; border-radius:6px;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="font-weight: 600; font-size: 0.9rem;">Email Address</label>
+            <input type="email" id="signup-email" name="email" autocomplete="email" required placeholder="Enter your email" style="width:100%; padding:0.8rem; margin-top:0.4rem; border:1px solid #ccc; border-radius:6px;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="font-weight: 600; font-size: 0.9rem;">Password</label>
+            <div style="position: relative;">
+              <input type="password" id="signup-password" name="new-password" autocomplete="new-password" required placeholder="Create a password (min 6 chars)" style="width:100%; padding:0.8rem; padding-right: 2.5rem; margin-top:0.4rem; border:1px solid #ccc; border-radius:6px;">
+              <i class="fas fa-eye" onclick="togglePassword('signup-password', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; margin-top: 0.2rem;"></i>
+            </div>
+          </div>
+          <button type="submit" style="width:100%; background:var(--primary); color:white; padding:0.8rem; border:none; border-radius:8px; font-weight:700; cursor:pointer;">Sign Up</button>
+        </form>
+        <div style="text-align:center; margin-top:1.2rem; font-size: 0.9rem;">
+          Already have an account? <a href="#" onclick="switchForm('login')" style="color:var(--primary); font-weight:700; text-decoration:none;">Login</a>
+        </div>
+      </div>
+
+      <!-- Login Form (Initially Visible) -->
+      <div id="login-container">
+        <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Welcome Back</h2>
+        <form id="login-form">
+          <div style="margin-bottom: 1rem;">
+            <label style="font-weight: 600; font-size: 0.9rem;">Email Address</label>
+            <input type="email" id="login-email" name="email" autocomplete="email" required placeholder="Enter your email" style="width:100%; padding:0.8rem; margin-top:0.4rem; border:1px solid #ccc; border-radius:6px;">
+          </div>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="font-weight: 600; font-size: 0.9rem;">Password</label>
+            <div style="position: relative;">
+              <input type="password" id="login-password" name="current-password" autocomplete="current-password" required placeholder="Enter your password" style="width:100%; padding:0.8rem; padding-right: 2.5rem; margin-top:0.4rem; border:1px solid #ccc; border-radius:6px;">
+              <i class="fas fa-eye" onclick="togglePassword('login-password', this)" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #888; margin-top: 0.2rem;"></i>
+            </div>
+          </div>
+          <button type="submit" style="width:100%; background:var(--primary); color:white; padding:0.8rem; border:none; border-radius:8px; font-weight:700; cursor:pointer;">Login</button>
+        </form>
+        <div style="text-align:center; margin-top:1.2rem; font-size: 0.9rem;">
+          Don't have an account? <a href="#" onclick="switchForm('signup')" style="color:var(--primary); font-weight:700; text-decoration:none;">Sign Up</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Custom Popup Modal -->
+  <div id="custom-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 2rem; border-radius: 12px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+      <h3 id="popup-title" style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--primary);">Notice</h3>
+      <p id="popup-message" style="color: #555; margin-bottom: 1.5rem; font-size: 0.95rem;"></p>
+      <button onclick="closePopup()" style="background: var(--primary); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%;">OK</button>
+    </div>
+  </div>
+
+  <!-- Supabase CDN and Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  
+  <script>
+    function showPopup(title, message, callback = null) {
+      document.getElementById('popup-title').innerText = title;
+      document.getElementById('popup-message').innerText = message;
+      document.getElementById('custom-popup').style.display = 'flex';
+      window.popupCallback = callback;
+    }
+
+    function closePopup() {
+      document.getElementById('custom-popup').style.display = 'none';
+      if (window.popupCallback) {
+        window.popupCallback();
+      }
+    }
+
+    function switchForm(type) {
+      const loginDiv = document.getElementById('login-container');
+      const signupDiv = document.getElementById('signup-container');
+      
+      if (type === 'login') {
+        loginDiv.style.display = 'block';
+        signupDiv.style.display = 'none';
+      } else {
+        loginDiv.style.display = 'none';
+        signupDiv.style.display = 'block';
+      }
+    }
+
+    // Password View / Hide Toggle Function
+    function togglePassword(fieldId, iconElem) {
+      const passwordField = document.getElementById(fieldId);
+      if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        iconElem.classList.remove('fa-eye');
+        iconElem.classList.add('fa-eye-slash');
+      } else {
+        passwordField.type = 'password';
+        iconElem.classList.remove('fa-eye-slash');
+        iconElem.classList.add('fa-eye');
+      }
+    }
+
+    // 1. Sign Up Process
+    document.getElementById('signup-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('signup-name').value;
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+
+      const { data, error } = await supabaseClient.auth.signUp({
+        email: email,
+        password: password,
+        options: {
+          data: {
+            full_name: name
+          }
+        }
+      });
+
+      if (error) {
+        showPopup("Sign Up Error", error.message);
+        return;
+      }
+
+      showPopup("Success!", "Account created successfully! Please login now.", () => {
+        switchForm('login');
+      });
+    });
+
+    // 2. Login Process
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      const { data, error } = await supabaseClient.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+      if (error) {
+        showPopup("Login Error", error.message);
+      } else {
+        showPopup("Welcome!", "Login successful!", () => {
+          if (email === 'admin@gmail.com') {
+            window.location.href = 'admin.html';
+          } else {
+            const redirectPage = localStorage.getItem('redirectAfterLogin') || 'index.html';
+            localStorage.removeItem('redirectAfterLogin');
+            window.location.href = redirectPage;
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>

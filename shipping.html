@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shipping Info - Golden Creeper Spice Garden</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .shipping-section {
+      padding: 3rem 0;
+    }
+
+    /* Modern Process Cards Grid */
+    .shipping-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .step-card {
+      background: #ffffff;
+      padding: 2.5rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+    }
+
+    .step-icon {
+      width: 70px;
+      height: 70px;
+      background: rgba(46, 125, 50, 0.1);
+      color: #2e7d32;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 1.5rem auto;
+    }
+
+    .step-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .step-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 0.8rem;
+    }
+
+    .step-card p {
+      color: #666;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Delivery Details & Info Box */
+    .shipping-details-box {
+      background: #f8f9fa;
+      border-radius: 16px;
+      padding: 2.5rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
+    .delivery-destinations {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .destination-card {
+      background: #ffffff;
+      padding: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+      text-align: center;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .destination-card h4 {
+      font-size: 1rem;
+      color: #1a1a1a;
+      margin-bottom: 0.3rem;
+    }
+
+    .destination-card span {
+      color: #2e7d32;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .courier-info {
+      text-align: center;
+      color: #555;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .customs-notice {
+      background: rgba(255, 152, 0, 0.08);
+      border-left: 4px solid #ff9800;
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 12px 12px 0;
+      color: #795548;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation Bar -->
+  <header>
+    <div class="header-container">
+      <a href="index.html" style="text-decoration: none;">
+        <div class="logo">🌿 Golden Creeper</div>
+      </a>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="about.html" >About Us</a>
+        <a href="products.html">Products</a>
+        <a href="benefits.html">Benefits</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="shipping.html"class="active">Shipping</a>
+        <a href="contact.html">Contact Us</a>
+        <a href="my-orders.html">My Orders</a>
+        
+        <!-- Shopping Cart Icon -->
+        <a href="cart.html" class="cart-icon-btn" title="View Cart">
+          <i class="fas fa-shopping-cart"></i>
+          <span id="cart-count" class="cart-badge">0</span>
+        </a>
+
+        <!-- Login / User Profile Dynamic Menu Item -->
+        <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Shipping Main Section -->
+  <section class="shipping-section">
+    <div class="container" style="max-width: 1000px;">
+      
+      <div class="text-center" style="margin-bottom: 2.5rem;">
+        <span class="badge">Fast & Reliable</span>
+        <h2>Shipping Information</h2>
+        <p class="subtitle">We ensure your authentic spices and herbal products reach your doorstep safely and swiftly.</p>
+      </div>
+
+      <!-- 3 Stages Grid -->
+      <div class="shipping-steps">
+        
+        <!-- Stage 1 -->
+        <div class="step-card">
+          <span class="step-number">Stage 01</span>
+          <div class="step-icon">
+            <i class="fas fa-shopping-bag"></i>
+          </div>
+          <h3>Order Placement</h3>
+          <p>Customer places the order securely through our website.</p>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="step-card">
+          <span class="step-number">Stage 02</span>
+          <div class="step-icon">
+            <i class="fas fa-box-open"></i>
+          </div>
+          <h3>Packing & Dispatch</h3>
+          <p>Package is securely packed and shipped within 48 hours.</p>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="step-card">
+          <span class="step-number">Stage 03</span>
+          <div class="step-icon">
+            <i class="fas fa-plane-departure"></i>
+          </div>
+          <h3>Global Delivery</h3>
+          <p>Shipped safely to your destination country with live tracking.</p>
+        </div>
+
+      </div>
+
+      <!-- Delivery Estimates & Courier Box -->
+      <div class="shipping-details-box">
+        <h3 class="text-center" style="margin-bottom: 0.5rem;">Estimated Delivery Timelines</h3>
+        <p class="text-center" style="color: #666; font-size: 0.9rem; margin-bottom: 1.5rem;">Delivery durations vary based on your shipping region:</p>
+
+        <div class="delivery-destinations">
+          <div class="destination-card">
+            <h4>India</h4>
+            <span>Within 5 days</span>
+          </div>
+          <div class="destination-card">
+            <h4>Europe</h4>
+            <span>7 - 10 days</span>
+          </div>
+          <div class="destination-card">
+            <h4>Americas</h4>
+            <span>10 - 12 days</span>
+          </div>
+        </div>
+
+        <div class="courier-info">
+          <i class="fas fa-shipping-fast" style="color: #2e7d32;"></i>
+          <span>Dispatched via <strong>UPS</strong> or <strong>DHL</strong>. Tracking numbers provided upon dispatch.</span>
+        </div>
+      </div>
+
+      <!-- Customs Notice -->
+      <div class="customs-notice">
+        <i class="fas fa-info-circle"></i> 
+        Customers are fully responsible for clearing the package at the destination and for paying any applicable customs duties, taxes, or other charges, if there are any.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container grid-3">
+      <div>
+        <h3>Golden Creeper</h3>
+        <p>Your trusted source for organic spices and authentic herbal remedies in Ahungalla, Sri Lanka.</p>
+      </div>
+      <div>
+        <h3>Quick Links</h3>
+        <p><a href="index.html">Home</a></p>
+        <p><a href="about.html">About Us</a></p>
+        <p><a href="products.html">All Products</a></p>
+        <p><a href="benefits.html">Herbal Benefits</a></p>
+        <p><a href="gallery.html">Photo Gallery</a></p>
+        <p><a href="shipping.html">Shipping Info</a></p>
+        <p><a href="contact.html">Contact Us</a></p>
+      </div>
+      <div>
+        <h3>Visit Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> Ahungalla, Sri Lanka</p>
+        <p><i class="fas fa-clock"></i> Open Daily: 8.00 AM - 6.00 PM</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
+```[cite: 6]
