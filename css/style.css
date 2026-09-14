@@ -382,3 +382,25 @@ input[type="number"], input[type="text"], input[type="password"], textarea { pad
 @media (max-width: 576px) {
   .products-grid { grid-template-columns: 1fr; }
 }
+
+.card-details-box {
+      background: #f1f5f9;
+      padding: 1.2rem;
+      border-radius: 10px;
+      border: 1px solid #e2e8f0;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .card-details-box h3 {
+      font-size: 1.1rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .card-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
