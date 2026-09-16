@@ -4,7 +4,7 @@
   --accent: #FFD700;       /* High Contrast Gold */
   --accent-hover: #E6C200;
   --dark: #0D1610;         
-  --light: #FFFFFF;        /* මුළු සයිට් එකේම body එක සඳහා සුදු පාට */
+  --light: #FFFFFF;        /* Global body background color */
   --white: #ffffff;
   --gray: #64748B;
   --shadow: 0 12px 30px rgba(0,0,0,0.08);
@@ -13,7 +13,7 @@
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Plus Jakarta Sans', sans-serif; }
 html { scroll-behavior: smooth; }
 
-/* මුළු සයිට් එකේම body එක සුදු පාටට සහ අකුරු පැහැදිලි අඳුරු පාටකට සැකසීම */
+/* Global body styling */
 body { 
   background-color: var(--light); 
   color: var(--dark); 
@@ -22,7 +22,7 @@ body {
   min-height: 100vh;
 }
 
-/* Header & Nav සඳහා අලංකාර Gradient Green එක */
+/* Header & Nav gradient style */
 header {
   background: linear-gradient(90deg, #07170e 0%, #0f2d1a 50%, #163822 100%);
   backdrop-filter: blur(10px);
@@ -220,7 +220,7 @@ h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1r
 .welcome-section, .safety-section, .products-section { padding: 4rem 0; }
 .safety-section { background: #EBF2ED; }
 
-/* Remedies Section (Side-by-Side 3 Cards Layout) */
+/* Remedies Section */
 .remedies-section {
   padding: 4rem 0;
 }
@@ -241,7 +241,7 @@ h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1r
   flex-direction: column;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   
-  /* Modern Fade Slide Up Animation */
+  /* Modern fade slide up animation */
   animation: modernFadeUp linear forwards;
   animation-timeline: view();
   animation-range: entry 15% cover 35%;
@@ -279,7 +279,7 @@ h2 { font-size: 2rem; color: var(--primary); font-weight: 700; margin-bottom: 1r
   margin: 0;
 }
 
-/* Keyframe for Modern Smooth Fade & Slide Animation */
+/* Keyframe for modern smooth fade & slide animation */
 @keyframes modernFadeUp {
   0% {
     opacity: 0;
@@ -367,7 +367,7 @@ th, td { padding: 0.8rem; text-align: left; border-bottom: 1px solid #ddd; }
 th { background: var(--primary); color: white; }
 input[type="number"], input[type="text"], input[type="password"], textarea { padding: 0.6rem; width: 100%; margin-bottom: 0.8rem; border: 1px solid #ccc; border-radius: 4px; }
 
-/* Responsive Adjustments */
+/* Responsive adjustments */
 @media (max-width: 992px) {
   .products-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -384,23 +384,23 @@ input[type="number"], input[type="text"], input[type="password"], textarea { pad
 }
 
 .card-details-box {
-      background: #f1f5f9;
-      padding: 1.2rem;
-      border-radius: 10px;
-      border: 1px solid #e2e8f0;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .card-details-box h3 {
-      font-size: 1.1rem;
-      color: var(--primary);
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .card-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
+  background: #f1f5f9;
+  padding: 1.2rem;
+  border-radius: 10px;
+  border: 1px solid #e2e8f0;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.card-details-box h3 {
+  font-size: 1.1rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.card-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}

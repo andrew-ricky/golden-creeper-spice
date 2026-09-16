@@ -39,7 +39,7 @@
           <span id="cart-count" class="cart-badge">0</span>
         </a>
 
-        <!-- Login / User Profile Dynamic Menu Item -->
+        <!-- Dynamic User Auth Nav Item -->
         <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
       </nav>
     </div>
@@ -50,10 +50,10 @@
     <div class="container">
       <h2 style="color: var(--primary); margin-bottom: 2rem; text-align: center;">Our Organic Products & Spices</h2>
       
-      <!-- Container for Dynamic Products (4 Columns Grid) -->
+      <!-- Container for dynamic products -->
       <div class="products-grid grid-4" id="all-products">
         
-        <!-- Supabase Data Load වන තුරු Placeholder -->
+        <!-- Loading placeholder -->
         <div class="product-card" style="text-align: center; padding: 2rem; grid-column: 1 / -1;">
           <p style="color: var(--gray);">Loading Products...</p>
         </div>
@@ -63,7 +63,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer>
     <div class="container grid-3">
       <div>
@@ -88,17 +88,17 @@
     </div>
   </footer>
 
-  <!-- Supabase CDN and Scripts -->
+  <!-- Supabase & App Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
 
-  <!-- Page Specific Script for Loading Products & Cart Protection -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       loadProductsFromSupabase();
     });
 
+    // Load products from Supabase database
     async function loadProductsFromSupabase() {
       const container = document.getElementById('all-products');
       
@@ -136,7 +136,7 @@
       });
     }
 
-    // Login Check before adding to cart
+    // Check login state before adding item to cart
     async function checkAuthAndAddToCart(id, name, price, image) {
       const { data: { session } } = await supabaseClient.auth.getSession();
       
@@ -147,7 +147,6 @@
         return;
       }
 
-      // Add to Cart logic
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const existingIndex = cart.findIndex(item => item.id === id);
       
@@ -159,12 +158,9 @@
 
       localStorage.setItem('cart', JSON.stringify(cart));
       
-      // Update cart count badge if function exists in main.js
       if (typeof updateCartCount === 'function') {
         updateCartCount();
       }
-
-      
     }
   </script>
 </body>

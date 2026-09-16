@@ -12,7 +12,7 @@
   <div class="container" style="padding: 4rem 0; display: flex; justify-content: center;">
     <div style="background: white; padding: 2.5rem; border-radius: 16px; width: 100%; max-width: 450px; box-shadow: 0 12px 30px rgba(0,0,0,0.08);">
       
-      <!-- Sign Up Form (Initially Hidden) -->
+      <!-- Sign up container form -->
       <div id="signup-container" style="display: none;">
         <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Create Account</h2>
         <form id="signup-form">
@@ -38,7 +38,7 @@
         </div>
       </div>
 
-      <!-- Login Form (Initially Visible) -->
+      <!-- Login container form -->
       <div id="login-container">
         <h2 style="text-align: center; margin-bottom: 1.5rem; color: var(--primary);">Welcome Back</h2>
         <form id="login-form">
@@ -77,6 +77,7 @@
   <script src="js/config.js"></script>
   
   <script>
+    // Show custom popup message
     function showPopup(title, message, callback = null) {
       document.getElementById('popup-title').innerText = title;
       document.getElementById('popup-message').innerText = message;
@@ -84,6 +85,7 @@
       window.popupCallback = callback;
     }
 
+    // Close custom popup modal
     function closePopup() {
       document.getElementById('custom-popup').style.display = 'none';
       if (window.popupCallback) {
@@ -91,6 +93,7 @@
       }
     }
 
+    // Switch between login and signup forms
     function switchForm(type) {
       const loginDiv = document.getElementById('login-container');
       const signupDiv = document.getElementById('signup-container');
@@ -104,7 +107,7 @@
       }
     }
 
-    // Password View / Hide Toggle Function
+    // Toggle password visibility
     function togglePassword(fieldId, iconElem) {
       const passwordField = document.getElementById(fieldId);
       if (passwordField.type === 'password') {
@@ -118,7 +121,7 @@
       }
     }
 
-    // 1. Sign Up Process
+    // Handle user sign up process
     document.getElementById('signup-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const name = document.getElementById('signup-name').value;
@@ -145,7 +148,7 @@
       });
     });
 
-    // 2. Login Process
+    // Handle user login process
     document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('login-email').value;

@@ -81,7 +81,7 @@
       transform: translateY(-2px);
     }
 
-    /* New Credit Card Styles */
+    /* Credit card input box styling */
     .card-details-box {
       background: #f1f5f9;
       padding: 1.2rem;
@@ -128,7 +128,7 @@
           <span id="cart-count" class="cart-badge" data-count="0" style="display:none;">0</span>
         </a>
 
-        <!-- Login / User Profile Dynamic Menu Item -->
+        <!-- Dynamic User Auth Nav Item -->
         <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
       </nav>
     </div>
@@ -166,7 +166,7 @@
             <input type="tel" id="checkout-phone" required placeholder="Enter your phone number">
           </div>
 
-          <!-- Credit Card Information Section -->
+          <!-- Credit Card Information Box -->
           <div class="card-details-box">
             <h3><i class="fas fa-credit-card"></i> Payment Information</h3>
             
@@ -207,7 +207,7 @@
     </div>
   </div>
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer>
     <div class="container grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
       <div>
@@ -228,7 +228,7 @@
     </div>
   </footer>
 
-  <!-- Supabase CDN and Scripts -->
+  <!-- Supabase & App Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
@@ -271,6 +271,7 @@
       }
     }
 
+    // Handle order checkout submission
     document.getElementById('checkout-form').addEventListener('submit', async (e) => {
       e.preventDefault();
 

@@ -1,19 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
   updateCartCount();
-  updateAuthNav(); // Page එක Load වෙද්දී Nav එකේ User status එක පරීක්ෂා කර පෙන්වීම
+  updateAuthNav(); // Check and display authentication state on load
   
-  // Products Load කිරීම (all-products div එක තිබේ නම් පමණක්)
+  // Fetch products if container exists
   if (document.getElementById('all-products')) {
     fetchProducts(false);
   }
   
-  // Cart Page එකේ සිටී නම් Cart එක Render කිරීම
+  // Render cart items if on cart page
   if (document.getElementById('cart-items')) {
     renderCart();
   }
 });
 
-// 1. Supabase මගින් Products Fetch කිරීම
+// Fetch products from Supabase database
 async function fetchProducts(isFeatured = false) {
   const container = isFeatured ? document.getElementById('featured-products') : document.getElementById('all-products');
   if (!container) return;
@@ -57,7 +57,7 @@ async function fetchProducts(isFeatured = false) {
   }
 }
 
-// 2. Cart එකට Item එකක් එකතු කිරීම
+// Add item to local storage cart
 function addToCart(id, name, price) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   let item = cart.find(x => x.id === id);
@@ -72,7 +72,7 @@ function addToCart(id, name, price) {
   updateCartCount();
 }
 
-// 3. Header එකේ Cart Count Badge එක Update කිරීම
+// Update shopping cart badge count
 function updateCartCount() {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   let totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
@@ -90,7 +90,7 @@ function updateCartCount() {
   }
 }
 
-// 4. Cart Page එක Render කිරීම
+// Render cart items table
 function renderCart() {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const tbody = document.getElementById('cart-items');
@@ -123,7 +123,7 @@ function renderCart() {
   if (totalElem) totalElem.innerText = grandTotal.toFixed(2);
 }
 
-// 5. Cart Quantity වෙනස් කිරීම
+// Update quantity of cart item
 function updateQty(index, qty) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   const parsedQty = parseInt(qty);
@@ -139,7 +139,7 @@ function updateQty(index, qty) {
   updateCartCount();
 }
 
-// 6. Cart එකෙන් Item එකක් ඉවත් කිරීම
+// Remove item from cart
 function removeFromCart(index) {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   cart.splice(index, 1);
@@ -148,7 +148,7 @@ function removeFromCart(index) {
   updateCartCount();
 }
 
-// 7. Navigation Bar එකේ User Authentication තත්ත්වය පරීක්ෂා කර "Welcome, Name" සමඟ පෙන්වීම
+// Update Auth UI in Navigation Bar
 async function updateAuthNav() {
   const authContainer = document.getElementById('auth-menu-item');
   if (!authContainer) return;
@@ -183,18 +183,22 @@ async function updateAuthNav() {
   }
 }
 
-// 8. Logout කිරීමේ Function එක
+// Handle user logout
 async function logoutUser() {
   await supabaseClient.auth.signOut();
   localStorage.removeItem('cart');
   window.location.href = 'index.html';
 }
 
-// 9. Proceed to Checkout Function (Login පරීක්ෂා කර Checkout වෙත යැවීම)
+// Proceed to checkout with login verification
 async function proceedToCheckout() {
   let cart = JSON.parse(localStorage.getItem('cart')) || [];
   if (cart.length === 0) {
-    alert("Your cart is empty. Add some products before checking out.");
+    if (typeof showPopup === 'function') {
+      showPopup("Cart Empty", "Your cart is empty. Add some products before checking out.");
+    } else {
+      alert("Your cart is empty. Add some products before checking out.");
+    }
     return;
   }
 
@@ -204,6 +208,12 @@ async function proceedToCheckout() {
     window.location.href = 'checkout.html';
   } else {
     localStorage.setItem('redirectAfterLogin', 'checkout.html');
-    window.location.href = 'login.html';
+    if (typeof showPopup === 'function') {
+      showPopup("Authentication Required", "Please login first to proceed with checkout.", () => {
+        window.location.href = 'login.html';
+      });
+    } else {
+      window.location.href = 'login.html';
+    }
   }
 }

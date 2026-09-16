@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="css/style.css">
   
   <style>
-    /* Cart Page Specific Modern Styling */
+    /* Cart page layout styling */
     .cart-section {
       padding: 3rem 0;
       min-height: 60vh;
@@ -36,7 +36,7 @@
       padding-bottom: 0.8rem;
     }
 
-    /* Modern Table Layout */
+    /* Cart table styling */
     .cart-table {
       width: 100%;
       border-collapse: separate;
@@ -75,7 +75,7 @@
       background: #fcfdfc;
     }
 
-    /* Quantity Input inside Cart */
+    /* Quantity input styling inside table */
     .cart-table input[type="number"] {
       width: 70px;
       padding: 0.4rem;
@@ -86,7 +86,7 @@
       background: #f8fafc;
     }
 
-    /* Action Delete Button */
+    /* Action button styling */
     .cart-table button, .btn-remove {
       background: #fee2e2;
       color: #dc2626;
@@ -105,7 +105,7 @@
       transform: translateY(-1px);
     }
 
-    /* Cart Summary Section */
+    /* Cart summary footer */
     .cart-summary {
       margin-top: 2rem;
       display: flex;
@@ -162,7 +162,7 @@
           <span id="cart-count" class="cart-badge">0</span>
         </a>
 
-        <!-- Login / User Profile Dynamic Menu Item -->
+        <!-- Dynamic User Auth Nav Item -->
         <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
       </nav>
     </div>
@@ -185,7 +185,7 @@
             </tr>
           </thead>
           <tbody id="cart-items">
-            <!-- JavaScript හරහා items මෙහි ඩයිනමික් ලෙස ලෝඩ් වේ -->
+            <!-- Cart items are dynamically loaded here -->
           </tbody>
         </table>
 
@@ -197,7 +197,16 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Custom Popup Modal -->
+  <div id="custom-popup" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div style="background: white; padding: 2rem; border-radius: 12px; width: 100%; max-width: 380px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+      <h3 id="popup-title" style="margin-bottom: 0.8rem; font-size: 1.3rem; color: var(--primary);">Notice</h3>
+      <p id="popup-message" style="color: #555; margin-bottom: 1.5rem; font-size: 0.95rem;"></p>
+      <button onclick="closePopup()" style="background: var(--primary); color: white; border: none; padding: 0.6rem 1.5rem; border-radius: 6px; font-weight: 700; cursor: pointer; width: 100%;">OK</button>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
   <footer>
     <div class="container grid-3" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
       <div>
@@ -218,7 +227,7 @@
     </div>
   </footer>
 
-  <!-- Supabase CDN and Scripts -->
+  <!-- Supabase & App Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
@@ -230,24 +239,19 @@
       }
     });
 
-    // Login Check and Proceed to Checkout
-    async function proceedToCheckout() {
-      const { data: { session } } = await supabaseClient.auth.getSession();
-      
-      if (!session) {
-        localStorage.setItem('redirectAfterLogin', 'cart.html');
-        alert('Please login first to proceed with checkout.');
-        window.location.href = 'login.html';
-        return;
-      }
+    // Custom popup control functions
+    function showPopup(title, message, callback = null) {
+      document.getElementById('popup-title').innerText = title;
+      document.getElementById('popup-message').innerText = message;
+      document.getElementById('custom-popup').style.display = 'flex';
+      window.popupCallback = callback;
+    }
 
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-      if (cart.length === 0) {
-        alert('Your cart is empty!');
-        return;
+    function closePopup() {
+      document.getElementById('custom-popup').style.display = 'none';
+      if (window.popupCallback) {
+        window.popupCallback();
       }
-
-      window.location.href = 'checkout.html';
     }
   </script>
 </body>

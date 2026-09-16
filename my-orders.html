@@ -76,7 +76,7 @@
     <div class="container orders-container">
       <h2 style="color: var(--primary); margin-bottom: 1.5rem;">My Order History</h2>
       
-      <!-- Login Required Box (Initially Hidden) -->
+      <!-- Login Required Box -->
       <div id="login-required-box" style="display: none; text-align: center; background: white; padding: 3rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
         <i class="fas fa-lock" style="font-size: 3rem; color: var(--primary); margin-bottom: 1rem;"></i>
         <h3 style="margin-bottom: 0.5rem; color: var(--dark);">Please Login to View Orders</h3>
@@ -86,7 +86,7 @@
 
       <!-- Orders List Container -->
       <div id="orders-list">
-        <!-- JavaScript හරහා order cards මෙහි ලෝඩ් වේ -->
+        <!-- Order cards loaded dynamically via JavaScript -->
       </div>
     </div>
   </section>
@@ -101,16 +101,15 @@
       const { data: { session } } = await supabaseClient.auth.getSession();
       
       if (!session) {
-        // Login වී නැත්නම් Login Required box එක පෙන්වීම සහ redirect path එක save කිරීම
         localStorage.setItem('redirectAfterLogin', 'my-orders.html');
         document.getElementById('login-required-box').style.display = 'block';
         return;
       }
 
-      // Login වී ඇත නම් orders fetch කර ගැනීම
       fetchUserOrders(session.user.id);
     });
 
+    // Fetch user orders from database
     async function fetchUserOrders(userId) {
       const container = document.getElementById('orders-list');
       

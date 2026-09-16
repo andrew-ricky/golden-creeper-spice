@@ -15,7 +15,7 @@
       padding: 3.5rem 0;
     }
 
-    /* Grid එක සීමා කර, කොටු දෙක එකම ප්‍රමාණයට පෙන්වීමට සකසා ඇත */
+    /* Constrain grid and format boxes to equal size */
     .contact-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -25,7 +25,7 @@
       margin: 0 auto 2rem auto;
     }
 
-    /* Square ප්‍රමාණයට සමාන කර සකස් කළ Image Container එක */
+    /* Fitted square image wrapper */
     .contact-image-wrapper {
       position: relative;
       border-radius: 16px;
@@ -36,18 +36,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      aspect-ratio: 1 / 1; /* හරියටම Square එකක් බවට පත් කරයි */
-      padding: 0; /* Full container එකටම fit වීමට padding ඉවත් කර ඇත */
+      aspect-ratio: 1 / 1;
+      padding: 0;
     }
 
     .contact-image-wrapper img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* Image එක කොටුව ඇතුළට සම්පූර්ණයෙන්ම fit වන ලෙස සකසා ඇත */
+      object-fit: cover;
       display: block;
     }
 
-    /* Square ප්‍රමාණයට සමාන කර සකස් කළ Contact Info Box එක */
+    /* Fitted square contact info box */
     .contact-info-box {
       background: #ffffff;
       padding: 2rem;
@@ -57,7 +57,7 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      aspect-ratio: 1 / 1; /* Image එකට සමාන Square ප්‍රමාණය ලබා දෙයි */
+      aspect-ratio: 1 / 1;
     }
 
     .info-item {
@@ -99,7 +99,7 @@
       margin: 0;
     }
 
-    /* Modern Compact Google Map Container */
+    /* Google Map container styling */
     .map-container {
       width: 100%;
       max-width: 900px;
@@ -121,7 +121,7 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
+  <!-- Navigation Bar -->
   <header>
     <div class="header-container">
       <a href="index.html" style="text-decoration: none;">
@@ -129,12 +129,12 @@
       </a>
       <nav>
         <a href="index.html">Home</a>
-        <a href="about.html" >About Us</a>
+        <a href="about.html">About Us</a>
         <a href="products.html">Products</a>
         <a href="benefits.html">Benefits</a>
         <a href="gallery.html">Gallery</a>
         <a href="shipping.html">Shipping</a>
-        <a href="contact.html"class="active">Contact Us</a>
+        <a href="contact.html" class="active">Contact Us</a>
         <a href="my-orders.html">My Orders</a>
         
         <!-- Shopping Cart Icon -->
@@ -143,7 +143,7 @@
           <span id="cart-count" class="cart-badge">0</span>
         </a>
 
-        <!-- Login / User Profile Dynamic Menu Item -->
+        <!-- Dynamic User Auth Nav Item -->
         <div id="auth-menu-item" style="display: inline-block; margin-left: 0.3rem;"></div>
       </nav>
     </div>
@@ -154,12 +154,12 @@
     <div class="container">
       <div class="contact-grid">
         
-        <!-- Left Side Image (Square & Fitted) -->
+        <!-- Left Side Image Box -->
         <div class="contact-image-wrapper">
           <img src="https://qapbnigbjcayoxpbkvyg.supabase.co/storage/v1/object/public/logo/ChatGPT%20Image%20Sep%2014,%202026,%2011_29_29%20PM.png" alt="Herbs and Spices">
         </div>
 
-        <!-- Right Side Contact Info (Square Card) -->
+        <!-- Right Side Contact Info Box -->
         <div class="contact-info-box">
           <span class="badge" style="margin-bottom: 0.3rem; display: inline-block; font-size: 0.75rem;">Get In Touch</span>
           <h2 style="font-size: 1.35rem; margin-bottom: 0.2rem; color: #1a1a1a;">Contact Us</h2>
@@ -192,7 +192,7 @@
 
       </div>
 
-      <!-- Modern Compact Google Map Section -->
+      <!-- Google Map Section -->
       <div class="map-container">
         <iframe 
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3964.8322695431!2d80.0416!3d6.3167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTknMDAuMCJOIDguwrAwMicyNS4wIkU!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk" 
@@ -205,7 +205,7 @@
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- Footer Section -->
   <footer>
     <div class="container grid-3">
       <div>
@@ -230,6 +230,7 @@
     </div>
   </footer>
 
+  <!-- Supabase & App Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/config.js"></script>
   <script src="js/main.js"></script>
