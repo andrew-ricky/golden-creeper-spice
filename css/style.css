@@ -404,3 +404,13 @@ input[type="number"], input[type="text"], input[type="password"], textarea { pad
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
+
+/* Extra mobile fixes for smaller screens */
+@media (max-width: 480px) {
+  .card-row { grid-template-columns: 1fr; }
+  header { padding: 0.8rem 1rem; }
+  header .logo { font-size: 1.3rem; }
+  h2 { font-size: 1.6rem; }
+  .container { padding: 0 0.8rem; }
+  table { display: block; overflow-x: auto; }
+}
