@@ -122,13 +122,13 @@
       products.forEach(p => {
         container.innerHTML += `
           <div class="product-card" style="background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: flex; flexDirection: column;">
-            <img src="${p.image}" alt="${p.name}" style="width: 100%; height: 200px; object-fit: cover;">
+            <img src="${p.image_url}" alt="${p.name}" style="width: 100%; height: 200px; object-fit: cover;">
             <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
               <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--dark);">${p.name}</h3>
               <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1;">${p.description || ''}</p>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
                 <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">$${parseFloat(p.price).toFixed(2)}</span>
-                <button onclick="checkAuthAndAddToCart(${p.id}, '${p.name}', ${p.price}, '${p.image}')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Add to Cart</button>
+                <button onclick="checkAuthAndAddToCart(${p.id}, '${p.name}', ${p.price}, '${p.image_url}')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Add to Cart</button>
               </div>
             </div>
           </div>
