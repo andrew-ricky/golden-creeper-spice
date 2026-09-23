@@ -128,7 +128,7 @@
               <p style="color: #666; font-size: 0.85rem; margin-bottom: 1rem; flex-grow: 1;">${p.description || ''}</p>
               <div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
                 <span style="font-weight: 700; color: var(--primary); font-size: 1.1rem;">$${parseFloat(p.price).toFixed(2)}</span>
-                <button onclick="checkAuthAndAddToCart(${p.id}, '${p.name}', ${p.price}, '${p.image_url}')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Add to Cart</button>
+                <button onclick="addToCart(${p.id}, '${p.name}', ${p.price}, '${p.image_url}')" style="background: var(--primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 6px; font-weight: 600; cursor: pointer;">Add to Cart</button>
               </div>
             </div>
           </div>
@@ -136,17 +136,8 @@
       });
     }
 
-    // Check login state before adding item to cart
-    async function checkAuthAndAddToCart(id, name, price, image) {
-      const { data: { session } } = await supabaseClient.auth.getSession();
-      
-      if (!session) {
-        localStorage.setItem('redirectAfterLogin', 'products.html');
-        alert('Please login first to add items to your cart.');
-        window.location.href = 'login.html';
-        return;
-      }
-
+    // Direct add to cart function without login check
+    function addToCart(id, name, price, image) {
       let cart = JSON.parse(localStorage.getItem('cart')) || [];
       const existingIndex = cart.findIndex(item => item.id === id);
       
