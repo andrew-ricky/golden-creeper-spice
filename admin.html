@@ -63,9 +63,46 @@
     .btn-primary { background: var(--primary); color: white; padding: 0.7rem 1.5rem; border: none; border-radius: 6px; font-weight: 700; cursor: pointer; }
     .btn-danger { background: #ef4444; color: white; padding: 0.4rem 0.8rem; border: none; border-radius: 4px; cursor: pointer; }
     .btn-edit { background: #f59e0b; color: white; padding: 0.4rem 0.8rem; border: none; border-radius: 4px; cursor: pointer; margin-right: 0.3rem; }
+
+    /* Custom Toast Notification Style */
+    #toast-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #1b4332;
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      font-weight: 600;
+      font-size: 0.95rem;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+    }
+    #toast-notification.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    #toast-notification.success {
+      background: #2d6a4f;
+      border-left: 4px solid #52b788;
+    }
+    #toast-notification.error {
+      background: #b91c1c;
+      border-left: 4px solid #f87171;
+    }
   </style>
 </head>
 <body>
+
+  <!-- Custom Toast Notification Element -->
+  <div id="toast-notification"><i id="toast-icon" class="fas fa-check-circle"></i><span id="toast-msg"></span></div>
 
   <!-- Main Header -->
   <header>
@@ -137,6 +174,26 @@
   <script src="js/config.js"></script>
   
   <script>
+    // Custom Toast Notification Function
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast-notification');
+      const msg = document.getElementById('toast-msg');
+      const icon = document.getElementById('toast-icon');
+
+      msg.innerText = message;
+      toast.className = `show ${type}`;
+
+      if (type === 'success') {
+        icon.className = 'fas fa-check-circle';
+      } else {
+        icon.className = 'fas fa-exclamation-circle';
+      }
+
+      setTimeout(() => {
+        toast.className = '';
+      }, 3000);
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       const { data: { session } } = await supabaseClient.auth.getSession();
       
@@ -236,9 +293,9 @@
         .eq('id', orderId);
 
       if (error) {
-        alert('Failed to update status: ' + error.message);
+        showToast('Failed to update status: ' + error.message, 'error');
       } else {
-        alert('Order #' + orderId + ' status updated to ' + newStatus);
+        showToast('Order #' + orderId + ' status updated to ' + newStatus, 'success');
       }
     }
 
@@ -318,9 +375,9 @@
           .eq('id', id);
 
         if (error) {
-          alert('Error updating product: ' + error.message);
+          showToast('Error updating product: ' + error.message, 'error');
         } else {
-          alert('Product updated successfully!');
+          showToast('Product updated successfully!', 'success');
           resetProductForm();
           fetchAllProducts();
         }
@@ -335,9 +392,9 @@
           }]);
 
         if (error) {
-          alert('Error adding product: ' + error.message);
+          showToast('Error adding product: ' + error.message, 'error');
         } else {
-          alert('Product added successfully!');
+          showToast('Product added successfully!', 'success');
           resetProductForm();
           fetchAllProducts();
         }
@@ -376,9 +433,10 @@
           .delete()
           .eq('id', id);
 
-        if (error) alert('Error deleting product: ' + error.message);
-        else {
-          alert('Product deleted successfully!');
+        if (error) {
+          showToast('Error deleting product: ' + error.message, 'error');
+        } else {
+          showToast('Product deleted successfully!', 'success');
           fetchAllProducts();
         }
       }
